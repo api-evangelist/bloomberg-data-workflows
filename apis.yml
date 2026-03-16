@@ -1,82 +1,64 @@
+aid: bloomberg-data-workflows
 name: Bloomberg Data Workflows API
-description: Bloomberg Data Workflows provides programmatic access to Bloomberg's financial data, analytics, and workflow solutions for institutional clients.
-image: https://www.bloomberg.com/company/wp-content/uploads/sites/2/2021/09/bloomberg-logo-1.png
-url: https://www.bloomberg.com/professional/product/data-workflows/
-created: '2024'
-modified: '2024'
-specificationVersion: '0.18'
-apis:
-- name: Bloomberg Data License API
-  description: Provides batch delivery of Bloomberg's reference, pricing, and analytics data for integration into proprietary applications and workflows.
-  image: https://www.bloomberg.com/company/wp-content/uploads/sites/2/2021/09/bloomberg-logo-1.png
-  humanURL: https://www.bloomberg.com/professional/product/data-license/
-  baseURL: https://api.bloomberg.com/datalicense/v1
-  tags:
-  - Financial Data
-  - Market Data
-  - Reference Data
-  - Pricing
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/documentation/
-  - type: OpenAPI
-    url: https://api.bloomberg.com/datalicense/v1/openapi.json
-  - type: Authentication
-    url: https://www.bloomberg.com/professional/support/api-library/
-- name: Bloomberg SAPI (Server API)
-  description: Real-time and historical market data API providing access to Bloomberg's comprehensive financial data through a server-based connection.
-  image: https://www.bloomberg.com/company/wp-content/uploads/sites/2/2021/09/bloomberg-logo-1.png
-  humanURL: https://www.bloomberg.com/professional/support/api-library/
-  baseURL: https://api.bloomberg.com/sapi/v3
-  tags:
-  - Real-time Data
-  - Market Data
-  - Historical Data
-  - Streaming
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/documentation/
-  - type: SDK
-    url: https://www.bloomberg.com/professional/support/api-library/
-- name: Bloomberg BEAP (Bloomberg Enterprise Access Point)
-  description: Enterprise-level data distribution platform for delivering Bloomberg data feeds to multiple applications and users within an organization.
-  image: https://www.bloomberg.com/company/wp-content/uploads/sites/2/2021/09/bloomberg-logo-1.png
-  humanURL: https://www.bloomberg.com/professional/product/enterprise-access-point/
-  baseURL: https://beap.bloomberg.com/api/v1
-  tags:
-  - Enterprise
-  - Data Distribution
-  - Data Feeds
-  - Integration
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/documentation/
-  - type: Architecture
-    url: https://www.bloomberg.com/professional/product/enterprise-access-point/
-- name: Bloomberg B-PIPE
-  description: Low-latency market data feed providing real-time and delayed market data, reference data, and analytics for algorithmic trading and quantitative analysis.
-  image: https://www.bloomberg.com/company/wp-content/uploads/sites/2/2021/09/bloomberg-logo-1.png
-  humanURL: https://www.bloomberg.com/professional/product/b-pipe/
-  baseURL: https://bpipe.bloomberg.com/api/v1
-  tags:
-  - Low Latency
-  - Streaming Data
-  - Real-time
-  - Trading
-  properties:
-  - type: Documentation
-    url: https://www.bloomberg.com/professional/support/api-library/
-  - type: SDK
-    url: https://www.bloomberg.com/professional/support/api-library/
-maintainers:
-- FN: Bloomberg L.P.
-  email: support@bloomberg.net
-  url: https://www.bloomberg.com/professional/support/
+description: >-
+  Bloomberg Data Workflows provides programmatic access to Bloomberg's financial
+  data, analytics, and workflow solutions for institutional clients.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Financial Services
-- Market Data
-- Financial Analytics
-- Enterprise Data
-- Trading
-- Investment Management
-include: []
+  - Financial Services
+  - Market Data
+  - Financial Analytics
+  - Enterprise Data
+  - Trading
+  - Investment Management
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: bloomberg-data-workflows:bloomberg-data-license-api
+    name: Bloomberg Data License API
+    description: >-
+      Provides batch delivery of Bloomberg's reference, pricing, and analytics
+      data for integration into proprietary applications and workflows.
+    humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
+    tags:
+      - Financial Data
+      - Market Data
+      - Reference Data
+      - Pricing
+    properties:
+      - type: Documentation
+        url: https://www.bloomberg.com/professional/support/api-library/
+  - aid: bloomberg-data-workflows:bloomberg-server-api
+    name: Bloomberg SAPI (Server API)
+    description: >-
+      Real-time and historical market data API providing access to Bloomberg's
+      comprehensive financial data through a server-based connection.
+    humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
+    tags:
+      - Real-time Data
+      - Market Data
+      - Historical Data
+      - Streaming
+    properties:
+      - type: Documentation
+        url: https://www.bloomberg.com/professional/support/api-library/
+      - type: SDKs
+        url: https://bloomberg.github.io/blpapi-docs/
+common:
+  - type: Portal
+    url: https://developer.bloomberg.com/
+  - type: Documentation
+    url: https://www.bloomberg.com/professional/support/api-library/
+  - type: Terms of Service
+    url: https://www.bloomberg.com/notices/tos/
+  - type: Privacy Policy
+    url: https://www.bloomberg.com/privacy/
+  - type: Support
+    url: https://www.bloomberg.com/professional/support/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
