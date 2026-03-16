@@ -1,5 +1,5 @@
 aid: bloomberg-data-workflows
-name: Bloomberg Data Workflows API
+name: Bloomberg Data Workflows
 description: >-
   Bloomberg Data Workflows provides programmatic access to Bloomberg's financial
   data, analytics, and workflow solutions for institutional clients.
