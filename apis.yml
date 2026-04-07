@@ -6,12 +6,12 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Financial Services
-  - Market Data
-  - Financial Analytics
   - Enterprise Data
-  - Trading
+  - Financial Analytics
+  - Financial Services
   - Investment Management
+  - Market Data
+  - Trading
 url: >-
   https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
 created: '2024-01-01'
@@ -27,8 +27,8 @@ apis:
     tags:
       - Financial Data
       - Market Data
-      - Reference Data
       - Pricing
+      - Reference Data
     properties:
       - type: Documentation
         url: https://www.bloomberg.com/professional/support/api-library/
@@ -39,9 +39,9 @@ apis:
       comprehensive financial data through a server-based connection.
     humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
     tags:
-      - Real-time Data
-      - Market Data
       - Historical Data
+      - Market Data
+      - Real-Time Data
       - Streaming
     properties:
       - type: Documentation
