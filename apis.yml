@@ -49,6 +49,8 @@ apis:
       - type: SDKs
         url: https://bloomberg.github.io/blpapi-docs/
 common:
+  - type: DomainSecurity
+    url: security/bloomberg-data-workflows-domain-security.yml
   - type: Portal
     url: https://developer.bloomberg.com/
   - type: Documentation
