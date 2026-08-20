@@ -20,6 +20,13 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomberg-
 tags:
   - Enterprise Data
   - Financial Analytics
+  - Financial-Services
+  - Investment Management
+  - Market Data
+  - Trading
+tags_raw:
+  - Enterprise Data
+  - Financial Analytics
   - Financial Services
   - Investment Management
   - Market Data
