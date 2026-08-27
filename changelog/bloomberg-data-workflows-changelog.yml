@@ -1,0 +1,53 @@
+generated: '2026-08-27'
+method: searched
+source: https://professional.bloomberg.com/support/documentation/release-notes/
+description: >-
+  Bloomberg publishes a dated release-notes page covering the Bloomberg Terminal and Office Tools
+  (the Excel add-in that carries the EMSX API). It is the only dated, public change record on any
+  Bloomberg host. There is NO changelog for the Data License REST API, none for the Server API,
+  and none for the BLPAPI SDK itself — SDK change is visible only as a version bump on the API
+  Library page and a new per-version documentation set. Entries below are recorded as published;
+  the API-relevant lines are called out.
+scheme: product-release-notes
+scope:
+  covered:
+    - Bloomberg Terminal
+    - Office Tools (Excel add-in, including the EMSX API)
+  not_covered:
+    - Bloomberg Data License REST API (api.bloomberg.com/eap)
+    - Bloomberg Server API (SAPI)
+    - BLPAPI SDK (versioned, but no per-release notes published)
+current:
+  bloomberg_terminal: 202.4.81
+  office_tools: 91.7.52/53
+entries:
+  - component: Bloomberg Terminal
+    version: 202.4.81
+    date: '2026-08-13'
+    breaking: false
+    highlights:
+      - Update Bloomberg Webview API version
+  - component: Office Tools
+    version: 91.7.52/53
+    date: '2026-07-29'
+    breaking: false
+    highlights:
+      - Fix an issue which can cause Excel crashing when using EMSX API
+  - component: Office Tools
+    version: 87.8.52/53
+    date: '2026-03-25'
+    breaking: false
+    highlights:
+      - Fix an issue which can cause EMSX API Excel requests to be stuck
+  - component: BLPAPI SDK
+    version: 3.26.7.1
+    date: '2026-08-12'
+    breaking: unknown
+    highlights: []
+    source: >-
+      Not from the release-notes page. Date is the Last-Modified header on the published SDK
+      archives on blpapi.bloomberg.com; Bloomberg publishes no notes describing what changed.
+entry_count: 4
+window: >-
+  Recent window only. The release-notes page itself carries Terminal versions back to 36.17.80
+  (2020-04-06) and Office Tools back to 03.07.20 (2020-04-04).

@@ -1,0 +1,69 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live probes of https://api.bloomberg.com/eap/catalogs/ and
+  https://www.bloomberg.com/.well-known/openid-configuration, plus
+  https://professional.bloomberg.com/support/api-library/
+description: >-
+  Bloomberg's data-workflow surface carries three distinct and unrelated authentication models.
+  There is no OpenAPI to derive securitySchemes from, so every statement here was observed on a
+  live anonymous request or read from a first-party discovery document.
+schemes:
+  - id: dl-rest-jwt
+    api: Bloomberg Data License API (REST / Hypermedia API)
+    type: http
+    scheme: bearer
+    bearer_format: JWT
+    location: request header (a query-string form is also accepted)
+    host: https://api.bloomberg.com
+    base_path: /eap/
+    observed:
+      url: https://api.bloomberg.com/eap/catalogs/
+      status: 401
+      body: >-
+        {"error":"unauthorized_client","error_description":"No definition of jwt found in header
+        or query string.","errors":[{"errorCode":"unauthorized-client","status":401}]}
+    note: >-
+      The 401 names the mechanism exactly: every request must carry a JWT. Credentials are issued
+      per-customer as a downloadable credential file from the DATA <GO> portal; the JWT is signed
+      client-side per request (RFC 7519), it is not a long-lived bearer token fetched from a token
+      endpoint. No anonymous token endpoint, no client-credentials flow, and no public sandbox
+      credential exists.
+  - id: bloomberg-com-oidc
+    api: Bloomberg.com web identity + entitlements
+    type: openIdConnect
+    openid_connect_url: https://www.bloomberg.com/.well-known/openid-configuration
+    issuer: https://www.bloomberg.com
+    authorization_endpoint: https://login.bloomberg.com/api/oauth/authorize
+    token_endpoint: https://login.bloomberg.com/api/oauth/token
+    jwks_uri: https://login.bloomberg.com/api/oauth/.well-known/jwks.json
+    grant_types: [authorization_code, refresh_token]
+    response_types: [code]
+    pkce: [S256]
+    id_token_signing_alg: [RS256]
+    subject_types: [public]
+    scopes: [openid, user, entitlements]
+    observed:
+      url: https://www.bloomberg.com/.well-known/openid-configuration
+      status: 200
+    note: >-
+      This is the bloomberg.com consumer/subscriber identity provider — authorization code with
+      mandatory PKCE, refresh tokens, and an `entitlements` scope. It is NOT the Data License or
+      Server API authentication path; do not send these tokens to api.bloomberg.com. Recorded
+      because it is the only OAuth surface Bloomberg publishes anonymously, and because it is a
+      real, RFC 8414 + OIDC-discovery-conformant deployment.
+  - id: blpapi-session
+    api: Bloomberg Server API (SAPI) / Desktop API / B-PIPE
+    type: mutualTLS
+    location: transport
+    note: >-
+      BLPAPI is not HTTP. Clients open a TCP session with the BLPAPI SDK — localhost:8194 for the
+      Desktop API, or the customer's own SAPI/B-PIPE host and port. Identity is the Terminal
+      entitlement of the logged-in user (Desktop API) or, for SAPI/B-PIPE, an application name
+      plus the customer-provisioned TLS/PKCS#12 credentials issued by Bloomberg. There is no API
+      key, no bearer token and no public credential of any kind; access requires an active
+      Bloomberg Professional or Enterprise agreement.
+    docs: https://bloomberg.github.io/blpapi-docs/
+public_credential_available: false
+api_keys: false
+oauth2_client_credentials: false

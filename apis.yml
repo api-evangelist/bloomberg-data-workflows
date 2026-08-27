@@ -1,85 +1,155 @@
 aid: bloomberg-data-workflows
 name: Bloomberg Data Workflows
-description: >-
-  Bloomberg Data Workflows provides programmatic access to Bloomberg's financial
-  data, analytics, and workflow solutions for institutional clients.
+description: 'Bloomberg Data Workflows covers the programmatic paths institutional clients use to move Bloomberg''s
+  financial data into their own systems: the Data License API, which delivers reference, pricing, regulatory and
+  alternative data in bulk or per security over a JWT-authenticated REST/hypermedia endpoint at api.bloomberg.com/eap,
+  over SFTP, or natively into the major cloud providers; and the Server API (SAPI), the shared-server deployment
+  of BLPAPI that serves real-time subscription and historical request/response market data to applications across
+  a firm. Both are gated behind an active Bloomberg Professional or Enterprise agreement. Bloomberg ships first-party
+  BLPAPI SDKs for C++, Java, C# (.NET) and Python from its own distribution hosts, but publishes no OpenAPI, AsyncAPI,
+  GraphQL schema or MCP server for either API, and keeps the API reference behind the DATA <GO> customer portal.'
 type: Index
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: contract
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Enterprise contract
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - https://professional.bloomberg.com/products/data/data-license/
+  generated: '2026-08-27'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomberg-data-workflows.png
 tags:
-  - Enterprise Data
-  - Financial Analytics
-  - Financial-Services
-  - Investment Management
-  - Market Data
-  - Trading
+- Enterprise Data
+- Financial Analytics
+- Financial-Services
+- Investment Management
+- Market Data
+- Reference Data
+- Trading
 tags_raw:
-  - Enterprise Data
-  - Financial Analytics
-  - Financial Services
-  - Investment Management
-  - Market Data
-  - Trading
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
+- Enterprise Data
+- Financial Analytics
+- Financial Services
+- Investment Management
+- Market Data
+- Reference Data
+- Trading
+url: https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-08-27'
 specificationVersion: '0.23'
 apis:
-  - aid: bloomberg-data-workflows:bloomberg-data-license-api
-    name: Bloomberg Data License API
-    description: >-
-      Provides batch delivery of Bloomberg's reference, pricing, and analytics
-      data for integration into proprietary applications and workflows.
-    humanURL: https://www.bloomberg.com/professional/products/data/data-management/data-license/
-    tags:
-      - Financial Data
-      - Market Data
-      - Pricing
-      - Reference Data
-    properties:
-      - type: Documentation
-        url: https://www.bloomberg.com/professional/support/api-library/
-  - aid: bloomberg-data-workflows:bloomberg-server-api
-    name: Bloomberg SAPI (Server API)
-    description: >-
-      Real-time and historical market data API providing access to Bloomberg's
-      comprehensive financial data through a server-based connection.
-    humanURL: https://www.bloomberg.com/professional/products/data/data-connectivity/server-api/
-    tags:
-      - Historical Data
-      - Market Data
-      - Real-Time Data
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://www.bloomberg.com/professional/support/api-library/
-      - type: SDKs
-        url: https://bloomberg.github.io/blpapi-docs/
-common:
-  - type: DomainSecurity
-    url: security/bloomberg-data-workflows-domain-security.yml
-  - type: Portal
-    url: https://developer.bloomberg.com/
+- aid: bloomberg-data-workflows:bloomberg-data-license-api
+  name: Bloomberg Data License API
+  description: Batch and per-security delivery of Bloomberg's reference, pricing, regulatory and alternative data
+    for integration into proprietary applications and workflows. The REST / hypermedia entry point is https://api.bloomberg.com/eap/;
+    every request must carry a signed JWT (RFC 7519) issued against the customer's Data License credential file.
+    The same content is also delivered over SFTP and natively into the major cloud providers.
+  humanURL: https://professional.bloomberg.com/products/data/data-license/
+  baseURL: https://api.bloomberg.com/eap
+  tags:
+  - Financial Data
+  - Market Data
+  - Pricing
+  - Reference Data
+  properties:
   - type: Documentation
-    url: https://www.bloomberg.com/professional/support/api-library/
-  - type: TermsOfService
-    url: https://www.bloomberg.com/notices/tos/
-  - type: PrivacyPolicy
-    url: https://www.bloomberg.com/privacy/
-  - type: Support
-    url: https://www.bloomberg.com/professional/support/
+    url: https://professional.bloomberg.com/support/api-library/
+  - type: Authentication
+    url: authentication/bloomberg-data-workflows-authentication.yml
+  - type: ErrorCatalog
+    url: errors/bloomberg-data-workflows-problem-types.yml
+- aid: bloomberg-data-workflows:bloomberg-server-api
+  name: Bloomberg SAPI (Server API)
+  description: 'The shared-server deployment of BLPAPI, providing real-time subscription and historical request/response
+    market data to applications across a firm. SAPI is not an HTTP API: clients open a TCP session with the BLPAPI
+    SDK against the customer''s own Server API host (the Desktop API equivalent is localhost:8194), so no public
+    base URL exists. Identity is the firm''s Bloomberg entitlements, not a token.'
+  humanURL: https://professional.bloomberg.com/products/data/data-connectivity/server-api/
+  tags:
+  - Historical Data
+  - Market Data
+  - Real-Time Data
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://professional.bloomberg.com/support/api-library/
+  - type: APIReference
+    url: https://bloomberg.github.io/blpapi-docs/
+  - type: SDKs
+    url: packages/bloomberg-data-workflows-packages.yml
+common:
+- type: ParentCompany
+  url: https://apis.io/providers/bloomberg/
+  name: Bloomberg
+  x-relationship: product
+  x-generated-by: bloomberg-family:2026-08-27
+- type: Portal
+  url: https://developer.bloomberg.com/
+- type: Documentation
+  url: https://professional.bloomberg.com/support/api-library/
+- type: APIReference
+  url: https://bloomberg.github.io/blpapi-docs/
+- type: Support
+  url: https://professional.bloomberg.com/support/
+- type: GitHubOrganization
+  url: https://github.com/bloomberg
+- type: Login
+  url: https://bba.bloomberg.net/
+- type: TermsOfService
+  url: https://www.bloomberg.com/notices/tos/
+- type: PrivacyPolicy
+  url: https://www.bloomberg.com/privacy/
+- type: Packages
+  url: packages/bloomberg-data-workflows-packages.yml
+- type: SDKs
+  url: packages/bloomberg-data-workflows-packages.yml
+- type: CLI
+  url: cli/bloomberg-data-workflows-cli.yml
+- type: Authentication
+  url: authentication/bloomberg-data-workflows-authentication.yml
+- type: OAuthScopes
+  url: scopes/bloomberg-data-workflows-scopes.yml
+- type: ErrorCatalog
+  url: errors/bloomberg-data-workflows-problem-types.yml
+- type: Conventions
+  url: conventions/bloomberg-data-workflows-conventions.yml
+- type: Conformance
+  url: conformance/bloomberg-data-workflows-conformance.yml
+- type: Lifecycle
+  url: lifecycle/bloomberg-data-workflows-lifecycle.yml
+- type: ChangeLog
+  url: changelog/bloomberg-data-workflows-changelog.yml
+- type: WellKnown
+  url: well-known/bloomberg-data-workflows-well-known.yml
+- type: SecurityTxt
+  url: well-known/bloomberg-data-workflows-security.txt
+- type: Security
+  url: https://www.bloomberg.com/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/bloomberg-data-workflows-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/bloomberg-data-workflows-domain-security.yml
+- type: LLMsTxt
+  url: llms/bloomberg-data-workflows-llms.txt
+- type: Plans
+  url: plans/bloomberg-data-workflows-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/bloomberg-data-workflows-rate-limits.yml
+- type: FinOps
+  url: finops/bloomberg-data-workflows-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-27'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
+x-parent: bloomberg
+x-relationship: product

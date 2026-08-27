@@ -1,0 +1,91 @@
+generated: '2026-08-27'
+method: searched
+source: live HTTPS probes of every host named in apis.yml plus the Data License REST API host
+description: >-
+  RFC 8615 well-known discovery surface for the hosts behind Bloomberg's data workflow APIs.
+  www.bloomberg.com (and the bloomberg.com apex) serve a real RFC 9116 security.txt, an OpenID
+  Connect discovery document and an RFC 8414 OAuth authorization-server metadata document.
+  developer.bloomberg.com and data.bloomberg.com are single-page applications that answer 200
+  with the same HTML shell for every path, so their 200s are recorded as soft-404 catch-alls and
+  are NOT counted as documents. api.bloomberg.com (the Data License REST API host) refuses
+  anonymous requests outright.
+hosts:
+  - host: https://www.bloomberg.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain; charset=UTF-8
+        file: bloomberg-data-workflows-security.txt
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=utf-8
+        file: bloomberg-data-workflows-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json; charset=utf-8
+        file: bloomberg-data-workflows-oauth-authorization-server.json
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://bloomberg.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain; charset=UTF-8
+        note: >-
+          Identical body to the www host; the canonical URI inside the document names
+          https://www.bloomberg.com/.well-known/security.txt, so only the www copy is saved.
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=utf-8
+        note: Identical body to the www host; not saved twice.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json; charset=utf-8
+        note: Identical body to the www host; not saved twice.
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://developer.bloomberg.com
+    hit_count: 0
+    soft_404_control:
+      path: /.well-known/api-catalog
+      status: 200
+      content_type: text/html
+      bytes: 18505
+      note: >-
+        Every /.well-known/* path returns the same 18,505-byte client-side-rendered portal shell,
+        including obviously absent paths. This host is a single-page-application catch-all, not a
+        well-known surface; no document is recorded and no pointer is emitted from it.
+    documents: []
+  - host: https://data.bloomberg.com
+    hit_count: 0
+    soft_404_control:
+      path: /.well-known/api-catalog
+      status: 200
+      content_type: text/html; charset=UTF-8
+      bytes: 2363
+      note: >-
+        DATA <GO> (Bloomberg Enterprise Access Point) is an Angular SPA; every /.well-known/* path
+        returns the same 2,363-byte shell. Recorded as a catch-all, not as documents.
+    documents: []
+  - host: https://api.bloomberg.com
+    hit_count: 0
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/agent-card.json
+        status: 403
+    note: >-
+      The Data License REST API host answers every anonymous request with
+      {"error":"access_denied","errorCode":"forbidden"}; it publishes no anonymous discovery surface.

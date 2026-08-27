@@ -1,0 +1,34 @@
+generated: '2026-08-27'
+method: searched
+status: none
+source: >-
+  Searched Bloomberg's own hosts (professional.bloomberg.com, developer.bloomberg.com,
+  data.bloomberg.com, api.bloomberg.com, github.com/bloomberg) and the public MCP registries.
+description: >-
+  Bloomberg publishes no Model Context Protocol server for the data-workflow APIs. Every
+  "Bloomberg MCP" in circulation is a community project (tallinn102/bloomberg-mcp,
+  QmQsun/Bloomberg-MCP, sbctreasury/bloomberg-mcp and forks) that requires a Bloomberg Terminal
+  running and logged in on the same machine and speaks to the local BLPAPI session on
+  localhost:8194. None is authored, endorsed or hosted by Bloomberg, none is reachable as a
+  network endpoint, and none would work without a Terminal seat — so none of them is a Bloomberg
+  agent surface, and none is recorded here as one.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+server: null
+tools: []
+tools_derivable: false
+tools_derivable_note: >-
+  A candidate tool list cannot be derived either: there is no OpenAPI, GraphQL SDL or WSDL in this
+  repo or on any Bloomberg host to derive operations from. Deriving tools from product marketing
+  copy would fabricate an interface.
+third_party_servers:
+  - name: bloomberg-mcp
+    url: https://github.com/QmQsun/Bloomberg-MCP
+    official: false
+    transport: stdio (local, requires Bloomberg Terminal on localhost:8194)
+    note: Community server; recorded to distinguish it from a Bloomberg-published one, not as a provider surface.

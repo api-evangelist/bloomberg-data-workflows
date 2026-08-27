@@ -1,0 +1,98 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live probes of https://www.bloomberg.com/.well-known/* and https://api.bloomberg.com/eap/*,
+  plus https://professional.bloomberg.com/support/api-library/
+description: >-
+  Cross-cutting and domain standards assessed against what Bloomberg actually serves. Bloomberg
+  publishes no OpenAPI, AsyncAPI, GraphQL SDL or WSDL for the data-workflow APIs, so every
+  `conforms: true` below rests on a document fetched from a Bloomberg host, and every unproven
+  standard is recorded as unverified rather than assumed. Bloomberg has been an OpenAPI Initiative
+  member since April 2020, but no OpenAPI document for these APIs is published anonymously.
+standards:
+  - id: oidc-discovery
+    conforms: true
+    evidence: >-
+      https://www.bloomberg.com/.well-known/openid-configuration returns 200 application/json with
+      issuer, authorization_endpoint, token_endpoint, jwks_uri, response_types_supported,
+      subject_types_supported and id_token_signing_alg_values_supported.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: >-
+      https://www.bloomberg.com/.well-known/oauth-authorization-server returns 200 with issuer,
+      authorization_endpoint, token_endpoint, jwks_uri, response_types_supported and
+      code_challenge_methods_supported.
+  - id: rfc7636-pkce
+    conforms: true
+    evidence: 'code_challenge_methods_supported: ["S256"] in both discovery documents.'
+  - id: oauth2
+    conforms: true
+    evidence: 'grant_types_supported: [authorization_code, refresh_token]; response_types_supported: [code].'
+  - id: rfc7519-jwt
+    conforms: true
+    evidence: >-
+      https://api.bloomberg.com/eap/catalogs/ returns 401 "No definition of jwt found in header or
+      query string." — the Data License REST API is JWT-authenticated per request.
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: >-
+      https://www.bloomberg.com/.well-known/security.txt returns 200 text/plain with Contact,
+      Canonical, Policy, Preferred-Languages and a future-dated Expires (2027-07-01T00:00:00Z).
+  - id: rfc8615-well-known
+    conforms: true
+    evidence: Three real documents served under /.well-known/ on www.bloomberg.com and the apex.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Data License REST API errors are application/json with an OAuth-style {error,
+      error_description} pair plus a JSON:API-style errors[] array; no application/problem+json and
+      no `type` URI. See errors/bloomberg-data-workflows-problem-types.yml.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      /openapi.json, /openapi.yaml, /swagger.json, /api-docs and /redoc probed on
+      api.bloomberg.com (403), data.bloomberg.com (SPA shell), developer.bloomberg.com (SPA shell)
+      and professional.bloomberg.com — no document parses as OpenAPI or Swagger.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No AsyncAPI document served; the streaming/subscription surface (SAPI, B-PIPE) is BLPAPI's
+      own binary session protocol, not an HTTP event contract.
+  - id: graphql
+    conforms: false
+    evidence: https://api.bloomberg.com/graphql returns 403 access_denied; no introspectable endpoint.
+  - id: soap-wsdl
+    conforms: false
+    evidence: '?wsdl probed on api.bloomberg.com, www.bloomberg.com and professional.bloomberg.com — no WSDL.'
+  - id: mcp
+    conforms: false
+    evidence: >-
+      No first-party Model Context Protocol server is published; the Bloomberg MCP servers in
+      circulation are community projects that wrap a locally running Terminal on localhost:8194.
+  - id: a2a-agent-card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json return 404 on www.bloomberg.com and
+      the apex, 403 on api.bloomberg.com, and the SPA shell on the two SPA hosts.
+domain_standards:
+  regime: securities_market_data
+  assessed:
+    - id: fix-protocol
+      conforms: unverified
+      evidence: >-
+        Bloomberg implements FIX in EMSX/TOMS, not in the Data License or Server API surface this
+        profile covers, and no contract is published anonymously to check. Recorded as unverified
+        rather than claimed.
+    - id: iso-20022
+      conforms: unverified
+      evidence: >-
+        No anonymously reachable contract or message-type declaration on these hosts to check
+        against; Data License dataset schemas live behind the DATA <GO> customer gate.
+    - id: mifid-ii
+      conforms: unverified
+      evidence: >-
+        Marketed as a regulatory-reporting content set within Data License, but the claim appears
+        on a product page, not in a contract, so it is not scored here.
+  note: >-
+    Reward-only dimension. Nothing is asserted for this provider because the machine-readable
+    contract that would carry a domain-standard signature is not published.

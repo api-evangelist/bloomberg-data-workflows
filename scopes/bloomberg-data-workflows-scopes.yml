@@ -1,0 +1,42 @@
+generated: '2026-08-27'
+method: probed
+source: https://www.bloomberg.com/.well-known/openid-configuration
+docs: https://www.bloomberg.com/.well-known/oauth-authorization-server
+description: >-
+  The only OAuth scope surface Bloomberg publishes anonymously is the bloomberg.com identity
+  provider's discovery document. Scopes were read verbatim from `scopes_supported`; no scope
+  descriptions are published, so the descriptions below state only what the scope name and the
+  surrounding discovery metadata establish, and are marked as such. The Data License REST API
+  (api.bloomberg.com/eap) uses per-request signed JWTs rather than OAuth scopes and therefore
+  contributes no scopes; BLPAPI/SAPI uses Terminal entitlements, not scopes.
+schemes:
+  - name: bloomberg-com-oidc
+    type: openIdConnect
+    source: https://www.bloomberg.com/.well-known/openid-configuration
+    issuer: https://www.bloomberg.com
+    authorization_url: https://login.bloomberg.com/api/oauth/authorize
+    token_url: https://login.bloomberg.com/api/oauth/token
+    flows: [authorization_code, refresh_token]
+    pkce_required_methods: [S256]
+scopes:
+  - name: openid
+    scheme: bloomberg-com-oidc
+    description: >-
+      Standard OpenID Connect scope; requests an ID token for the authenticated Bloomberg account.
+    description_source: OIDC Core 1.0 (the provider publishes no scope description)
+  - name: user
+    scheme: bloomberg-com-oidc
+    description: >-
+      Access to the authenticated user's Bloomberg.com profile. Bloomberg publishes no description
+      or claim list for this scope.
+    description_source: inferred-from-name
+  - name: entitlements
+    scheme: bloomberg-com-oidc
+    description: >-
+      Access to the authenticated user's Bloomberg subscription entitlements. Bloomberg publishes
+      no description or claim list for this scope.
+    description_source: inferred-from-name
+scope_count: 3
+note: >-
+  No public scopes/permissions reference page exists for any Bloomberg API. This artifact is
+  probed from the live discovery document, not searched from documentation.

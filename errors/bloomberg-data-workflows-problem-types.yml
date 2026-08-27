@@ -1,0 +1,69 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live anonymous requests to https://api.bloomberg.com/, https://api.bloomberg.com/eap/ and
+  https://api.bloomberg.com/eap/catalogs/
+format: vendor-json-errors-array
+media_type: application/json
+description: >-
+  Bloomberg publishes no error reference for the Data License REST API, but the API returns a
+  consistent, structured error envelope to anonymous callers, and that envelope was captured
+  directly. It is NOT RFC 9457 problem+json: the content type is application/json, there is no
+  `type` URI and no `title`/`detail` at the top level. The shape is closer to a JSON:API errors
+  array, with the two OAuth 2.0 top-level fields (`error`, `error_description`) duplicated
+  alongside it.
+envelope:
+  top_level:
+    - field: error
+      type: string
+      description: Machine-readable error slug, OAuth 2.0 style (e.g. access_denied, unauthorized_client).
+    - field: error_description
+      type: string
+      description: Human-readable message.
+    - field: errors
+      type: array
+      description: One or more structured error objects.
+  errors_item:
+    - field: id
+      type: string (uuid)
+      description: Per-occurrence identifier — the value to quote to Bloomberg support.
+    - field: status
+      type: integer
+      description: HTTP status repeated inside the object.
+    - field: title
+      type: string
+      description: Same slug as the top-level `error`.
+    - field: detail
+      type: string
+      description: Same message as `error_description`.
+    - field: errorCode
+      type: string
+      description: Hyphenated vendor error code (e.g. forbidden, unauthorized-client).
+    - field: meta.server-time
+      type: integer (unix seconds)
+      description: Server clock at the time of the error — useful when debugging JWT `iat`/`exp` skew.
+problems:
+  - status: 401
+    error: unauthorized_client
+    error_code: unauthorized-client
+    title: unauthorized_client
+    detail: No definition of jwt found in header or query string.
+    observed_at: https://api.bloomberg.com/eap/catalogs/
+    remediation: >-
+      Sign a JWT with the credential file issued for your Data License account and send it in the
+      request header. Check meta.server-time against your own clock before assuming the key is wrong.
+  - status: 403
+    error: access_denied
+    error_code: forbidden
+    title: access_denied
+    detail: Access forbidden.
+    observed_at: https://api.bloomberg.com/
+    remediation: >-
+      The host root and any path outside /eap/ are closed to all callers. Address requests to the
+      /eap/ hypermedia entry point.
+coverage:
+  problems_captured: 2
+  note: >-
+    Only the anonymous error surface could be observed. Authenticated 4xx/5xx semantics (quota,
+    malformed request, dataset not entitled) are documented only inside the customer-gated DATA
+    <GO> documentation and are deliberately NOT guessed here.

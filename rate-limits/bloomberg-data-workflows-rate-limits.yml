@@ -3,96 +3,51 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Bloomberg Data Workflows
 providerId: bloomberg-data-workflows
+generated: '2026-08-27'
+method: searched
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-08-27'
+source: >-
+  Live probes of https://api.bloomberg.com/ and https://api.bloomberg.com/eap/catalogs/, plus
+  https://professional.bloomberg.com/support/api-library/
 tags:
   - Enterprise Data
   - Financial Analytics
   - Financial Services
-  - Investment Management
   - Market Data
-  - Trading
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Bloomberg Data Workflows API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
+  - Trading
+description: >-
+  Bloomberg publishes no rate limits for the Data License REST API or the Server API on any
+  anonymously reachable page, and no rate-limit headers appear on the live anonymous responses.
+  Consumption on these APIs is governed contractually — by entitlement, dataset scope and
+  Data License request volume in the customer's agreement — rather than by a published
+  requests-per-minute ceiling. Bloomberg does maintain a "Web API Connectivity Policy", but it is
+  served from the Enterprise Console (console.blpprofessional.com/about/82), a JavaScript-rendered
+  application whose content is not present in the delivered HTML.
+limit_count: 0
+limits: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  observed: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header was returned on any anonymous request. The
+    401 and 403 responses carry only content-type and the vendor error envelope.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Bloomberg Data License API
-      - Bloomberg SAPI (Server API)
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Bloomberg Data License API
-      - Bloomberg SAPI (Server API)
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Bloomberg Data License API
-      - Bloomberg SAPI (Server API)
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Bloomberg Data License API
-      - Bloomberg SAPI (Server API)
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Bloomberg Data License API
-      - Bloomberg SAPI (Server API)
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  throttled: unknown
+  note: The status code returned on exhaustion is not documented publicly.
+evidence:
+  - url: https://api.bloomberg.com/eap/catalogs/
+    status: 401
+    finding: No rate-limit headers on the response; body is the JWT-missing error envelope.
+  - url: https://api.bloomberg.com/
+    status: 403
+    finding: No rate-limit headers on the response.
+  - url: https://console.blpprofessional.com/about/82
+    status: 200
+    finding: >-
+      "Web API Connectivity Policy" is a client-side-rendered SPA route; the served HTML is a
+      2.3KB shell with no policy text.
+note: >-
+  This file replaces a 2026-05-04 bulk-sweep scaffold that asserted free/professional tiers at
+  10 and 100 requests per minute with X-RateLimit-* headers. None of that was ever published by
+  Bloomberg. An honest limit_count of 0 with the probe record is the correct measurement.

@@ -1,0 +1,73 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://professional.bloomberg.com/support/api-library/ and
+  https://professional.bloomberg.com/support/documentation/release-notes/
+description: >-
+  Versioning and lifecycle posture for the Bloomberg data-workflow APIs, read from the surfaces
+  Bloomberg publishes anonymously. The SDK is versioned publicly and released often; the HTTP
+  contract is not versioned in public at all.
+versioning:
+  scheme: sdk-semver
+  current: 3.26.7.1
+  docs: https://bloomberg.github.io/blpapi-docs/
+  note: >-
+    BLPAPI SDK builds carry a four-part version (3.26.7.1) and each minor gets its own published
+    reference set at bloomberg.github.io/blpapi-docs/<language>/<major.minor.patch>/. The Data
+    License REST API is served under a single unversioned path prefix (/eap/) with no version
+    segment, no Accept-version header documented, and no public version history.
+  api_path_versioning: false
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No public deprecation policy, no RFC 8594 Sunset/Deprecation header documentation, and no
+    published end-of-life schedule for SDK versions. The API Library page carries only the current
+    release; the "all versions" index it links (https://blpapi.bloomberg.com/all_versions.html)
+    returns 404, so even the historical version list is broken in public.
+  observed:
+    url: https://blpapi.bloomberg.com/all_versions.html
+    status: 404
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment. Availability terms are contractual, inside the Bloomberg
+    Professional / Enterprise agreement.
+status_page: null
+status_page_note: >-
+  No public status page. status.bloomberg.com does not resolve (NXDOMAIN). Service health for
+  enterprise connectivity is surfaced inside the customer-gated Enterprise Console
+  (console.blpprofessional.com), which is an Angular SPA behind login.
+release_notes: https://professional.bloomberg.com/support/documentation/release-notes/
+platform_currency:
+  - component: BLPAPI SDK (C++, Java, .NET, Python)
+    version: 3.26.7.1
+    released: '2026-08-12'
+  - component: BLPAPI macOS ARM64 builds
+    version: 3.26.7.1 (C++) / 3.26.6.1 (Java)
+    status: experimental
+    note: Labelled Experimental on the API Library page; the Java macOS build trails the other platforms by one release.
+  - component: .NET FFI reference documentation
+    version: 3.26.6.64-experimental
+    note: The reference the API Library links for the .NET FFI binding is pinned one minor behind the shipped SDK.
+  - component: Schema Downloader
+    version: '1.2'
+    released: '2024-05-16'
+    note: Over two years without a release while the SDK it supports advanced through 3.26.
+  - component: BLPAPI Core Developer Guide / User Guide (PDF)
+    published: '2017-03'
+    url: https://data.bloomberglp.com/professional/sites/10/2017/03/BLPAPI-Core-Developer-Guide.pdf
+    note: >-
+      The canonical narrative documentation the API Library links is a 2017 PDF (v1.6, dated
+      8/30/2016) — still served (200, 1.2MB) and still the only conceptual guide on offer.
+retired_surfaces:
+  - name: blpapi-http
+    url: https://github.com/bloomberg/blpapi-http
+    status: archived
+    last_push: '2016-01-25'
+    note: >-
+      Bloomberg's own open-source HTTP wrapper for BLPAPI. Archived; last commit January 2016. It
+      is the only first-party attempt at an HTTP projection of BLPAPI in public and it is dead —
+      recorded so nobody mistakes it for a current contract.
+deprecated_operations: []

@@ -1,0 +1,91 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live anonymous requests to https://api.bloomberg.com/eap/*, plus
+  https://professional.bloomberg.com/support/api-library/ and https://bloomberg.github.io/blpapi-docs/
+description: >-
+  Cross-cutting runtime semantics for the Bloomberg data-workflow surface. Bloomberg publishes no
+  public API reference for these APIs, so this file records what is observable anonymously and
+  explicitly marks everything else undocumented rather than inferring it. An agent reading this
+  should understand that almost every runtime rule for these APIs is only available to a
+  contracted customer.
+auth_style:
+  dl_rest: Per-request signed JWT (RFC 7519) in a request header; no token endpoint, no API key.
+  blpapi: TCP session over the BLPAPI SDK with Terminal entitlements or customer-provisioned SAPI/B-PIPE credentials.
+  reference: authentication/bloomberg-data-workflows-authentication.yml
+idempotency:
+  supported: unknown
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No Idempotency-Key header, no request-replay semantics and no retry guidance are documented on
+    any public Bloomberg surface. NOT recorded as supported, and no Idempotency pointer is emitted:
+    the Data License REST API's write surface is job/request submission, where a replayed POST
+    plausibly creates a duplicate billable request, and an agent must not be told otherwise.
+pagination:
+  style: unknown
+  note: >-
+    The Data License REST API is hypermedia-driven (it is Bloomberg's "Hypermedia API"), so link
+    relations rather than page/offset parameters are the expected navigation model, but the
+    anonymous surface returns 401 before any collection is visible and no public reference states
+    the link relations. Left unknown rather than guessed.
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_id_tracing:
+  supported: true
+  field: errors[].id
+  format: uuid
+  note: >-
+    Every error object carries a per-occurrence `id` (uuid) — observed on both the 401 and the 403.
+    There is no documented request-id request header and no X-Request-Id on the response; the id is
+    server-generated and error-only.
+server_clock:
+  field: errors[].meta.server-time
+  format: unix seconds
+  note: >-
+    Returned on every error. Directly useful for a JWT-authenticated API: clock skew between the
+    caller and Bloomberg is the first thing to check when a signed token is rejected.
+versioning:
+  scheme: none-in-path
+  note: /eap/ carries no version segment; SDK versioning is separate. See lifecycle/.
+error_envelope:
+  format: vendor-json-errors-array
+  media_type: application/json
+  rfc9457: false
+  reference: errors/bloomberg-data-workflows-problem-types.yml
+rate_limit_signaling:
+  headers_observed: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header appeared on any anonymous response
+    (401/403). Whether authenticated responses carry them is not publicly documented.
+    See rate-limits/bloomberg-data-workflows-rate-limits.yml.
+dry_run_mode:
+  supported: unknown
+  note: >-
+    No documented preview/validate mode for Data License request submission. DATA <GO> offers an
+    interactive "browse, test and customize datasets" portal, but that is a human web workflow
+    behind login, not an API dry-run parameter.
+reversibility:
+  status: undocumented
+  grade: none
+  note: >-
+    The Data License REST API has a real write surface — a caller submits requests/jobs that
+    generate billable data deliveries — but Bloomberg publishes no cancel, void, delete or
+    reversal operation, no operationId list, and no window inside which a submitted request can be
+    withdrawn, because the entire reference sits behind the customer gate. This is recorded as
+    `undocumented`, NOT as `na`: `na` would assert the API is read-only, which is false, and it
+    would wrongly leave the provider out of the denominator. No window is stated here because
+    Bloomberg states none, and inventing one on a metered financial-data feed could cost a user
+    real money.
+  write_surfaces:
+    - surface: Data License REST API request submission (api.bloomberg.com/eap)
+      reversal_operation: null
+      window: null
+      docs: null
+      evidence:
+        url: https://api.bloomberg.com/eap/catalogs/
+        status: 401
+  read_only: false

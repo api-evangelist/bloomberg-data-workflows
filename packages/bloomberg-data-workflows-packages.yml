@@ -1,0 +1,98 @@
+generated: '2026-08-27'
+method: searched
+source: https://professional.bloomberg.com/support/api-library/
+description: >-
+  First-party Bloomberg client libraries for the data-workflow APIs. Every artifact below is the
+  BLPAPI SDK — the single client library Bloomberg ships for the Desktop API, the Server API
+  (SAPI), B-PIPE and the Bloomberg Platform. Bloomberg does NOT publish BLPAPI to any public
+  community registry: there is no `blpapi` on PyPI (404), none on npm, none on Maven Central
+  (g:com.bloomberglp returns 0 documents) and none on nuget.org (404). Distribution is from
+  Bloomberg's own hosts — a PEP 503 simple index and a NuGet v3 feed on blpapi.bloomberg.com,
+  plus versioned archives linked from the API Library page. Versions and dates below were read
+  from those first-party endpoints, not from a vendor claim.
+registries_checked:
+  - registry: pypi
+    query: https://pypi.org/pypi/blpapi/json
+    status: 404
+    result: absent
+  - registry: npm
+    query: https://registry.npmjs.org/@bloomberg/blpapi
+    status: 404
+    result: absent
+  - registry: maven-central
+    query: https://search.maven.org/solrsearch/select?q=g:com.bloomberglp
+    status: 200
+    result: 0 documents
+  - registry: nuget-org
+    query: https://api.nuget.org/v3/registration5-semver1/blpapi/index.json
+    status: 404
+    result: absent
+packages:
+  - language: python
+    registry: pypi-simple
+    registry_url: https://blpapi.bloomberg.com/repository/releases/python/simple/
+    name: blpapi
+    url: https://blpapi.bloomberg.com/repository/releases/python/simple/blpapi/
+    install: python -m pip install --index-url=https://blpapi.bloomberg.com/repository/releases/python/simple/ blpapi
+    official: true
+    version: 3.26.7.1
+    published: '2026-08-12'
+    docs: https://bloomberg.github.io/blpapi-docs/python/3.26.7/
+    note: >-
+      Bloomberg-hosted PEP 503 simple index, not PyPI. `published` is the Last-Modified header on
+      blpapi-3.26.7.1-py3-none-macosx_11_0_arm64.whl (Wed, 12 Aug 2026 14:24:22 GMT); the simple
+      index publishes no upload-time metadata field. Prior versions still listed on the index:
+      3.26.6.1, 3.26.5.1, 3.26.4.2.
+  - language: java
+    registry: vendor-download
+    name: blpapi_java
+    url: https://blpapi.bloomberg.com/download/releases/raw/files/blpapi_java_3.26.7.1.zip
+    install: Download blpapi_java_3.26.7.1.zip (Windows) or blpapi_java_3.26.7.1.tar.gz (Linux) from the API Library page and add the jar to the classpath
+    official: true
+    version: 3.26.7.1
+    published: '2026-08-12'
+    docs: https://bloomberg.github.io/blpapi-docs/java/3.26.7/
+    note: >-
+      No Maven coordinate exists — Bloomberg ships the jar as a versioned archive. `published` is
+      the Last-Modified header on the archive (Wed, 12 Aug 2026 14:10:49 GMT). The macOS ARM build
+      is still at 3.26.6.1 and is labelled Experimental on the API Library page.
+  - language: dotnet
+    registry: nuget-vendor
+    registry_url: https://nuget.blpapi.bloomberg.com/releases/v3/index.json
+    name: Bloomberglp.Blpapi
+    url: https://blpapi.bloomberg.com/download/releases/raw/files/blpapi_dotnet_3.26.7.1.zip
+    install: dotnet nuget add source https://token:download@nuget.blpapi.bloomberg.com/releases/v3/index.json
+    official: true
+    version: 3.26.7.1
+    published: '2026-08-12'
+    docs: https://bloomberg.github.io/blpapi-docs/dotnet/3.26.6.64-experimental/html/N_Bloomberglp_Blpapi.htm
+    note: >-
+      Two distributions: the versioned zip (Last-Modified Wed, 12 Aug 2026 14:28:12 GMT) and a
+      Bloomberg-hosted NuGet v3 service index (200, credentialed as token:download) carrying the
+      newer FFI binding. The .NET FFI reference docs the API Library links are pinned at
+      3.26.6.64-experimental, one minor behind the shipped SDK.
+  - language: cpp
+    registry: vendor-download
+    name: blpapi_cpp
+    url: https://blpapi.bloomberg.com/download/releases/raw/files/blpapi_cpp_3.26.7.1-linux.tar.gz
+    install: Download blpapi_cpp_3.26.7.1-{windows.zip,linux.tar.gz,macos-arm64.tar.gz} from the API Library page
+    official: true
+    version: 3.26.7.1
+    published: '2026-08-12'
+    docs: https://bloomberg.github.io/blpapi-docs/cpp/3.26.7/
+    note: >-
+      `published` is the Last-Modified header on blpapi_cpp_3.26.7.1-linux.tar.gz
+      (Wed, 12 Aug 2026 14:02:23 GMT). The macOS ARM64 build is labelled Experimental.
+third_party:
+  - language: python
+    registry: pypi
+    name: xbbg
+    url: https://pypi.org/project/xbbg/
+    official: false
+    version: null
+    published: null
+    note: >-
+      Community pandas wrapper over blpapi; present on PyPI (200) and recorded only to make clear
+      it is NOT a Bloomberg package. Version deliberately left null — this pipeline records
+      currency for first-party libraries; an unofficial wrapper's release cadence is not a
+      Bloomberg signal.

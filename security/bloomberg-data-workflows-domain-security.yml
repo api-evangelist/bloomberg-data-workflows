@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-08-27'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -17,10 +17,10 @@ domains:
 - domain: bloomberg.com
   dnssec: false
   caa:
-  - 0 issuewild "digicert.com"
   - 0 iodef "mailto:reportvuln@bloomberg.net"
   - 0 issue "amazon.com"
   - 0 issue "digicert.com"
+  - 0 issuewild "digicert.com"
   spf: true
   dmarc: true
   dmarc_policy: reject

@@ -1,0 +1,33 @@
+generated: '2026-08-27'
+method: searched
+source: https://professional.bloomberg.com/support/api-library/
+description: >-
+  Bloomberg ships one first-party command-line utility alongside the BLPAPI SDK: the Schema
+  Downloader. It is a standalone tool that downloads the service schemas a BLPAPI session would
+  negotiate at runtime, so those schemas can be replayed offline against the SDK's TestUtil
+  component to build and assert messages without a live Bloomberg connection. There is no
+  general-purpose Bloomberg API CLI — data retrieval is done through the BLPAPI SDK bindings or
+  the Data License REST API, not from a shell.
+clis:
+  - name: Schema Downloader
+    binary: schemadownloader
+    version: '1.2'
+    published: '2024-05-16'
+    official: true
+    purpose: >-
+      Download BLPAPI service schemas for offline use with the SDK TestUtil component, enabling
+      message construction and application-behaviour tests without a live session.
+    install:
+      - platform: windows
+        method: archive
+        url: https://blpapi.bloomberg.com/download/releases/raw/files/schemadownloader_1.2-windows.zip
+      - platform: linux
+        method: archive
+        url: https://blpapi.bloomberg.com/download/releases/raw/files/schemadownloader_1.2-linux.tar.gz
+    commands: []
+    note: >-
+      `published` is the Last-Modified header on schemadownloader_1.2-linux.tar.gz
+      (Thu, 16 May 2024 12:37:04 GMT) — the tool has not been re-released in over two years while
+      the BLPAPI SDK it supports moved to 3.26.7.1 in August 2026. The command/flag surface is NOT
+      published on any public page; it ships inside the archive, so `commands` is deliberately
+      empty rather than guessed.
