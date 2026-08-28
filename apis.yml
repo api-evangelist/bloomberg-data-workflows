@@ -9,6 +9,17 @@ description: 'Bloomberg Data Workflows covers the programmatic paths institution
   BLPAPI SDKs for C++, Java, C# (.NET) and Python from its own distribution hosts, but publishes no OpenAPI, AsyncAPI,
   GraphQL schema or MCP server for either API, and keeps the API reference behind the DATA <GO> customer portal.'
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: contract
   onboarding: sales
