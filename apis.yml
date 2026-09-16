@@ -1,13 +1,14 @@
 aid: bloomberg-data-workflows
 name: Bloomberg Data Workflows
-description: 'Bloomberg Data Workflows covers the programmatic paths institutional clients use to move Bloomberg''s
-  financial data into their own systems: the Data License API, which delivers reference, pricing, regulatory and
-  alternative data in bulk or per security over a JWT-authenticated REST/hypermedia endpoint at api.bloomberg.com/eap,
-  over SFTP, or natively into the major cloud providers; and the Server API (SAPI), the shared-server deployment
-  of BLPAPI that serves real-time subscription and historical request/response market data to applications across
-  a firm. Both are gated behind an active Bloomberg Professional or Enterprise agreement. Bloomberg ships first-party
-  BLPAPI SDKs for C++, Java, C# (.NET) and Python from its own distribution hosts, but publishes no OpenAPI, AsyncAPI,
-  GraphQL schema or MCP server for either API, and keeps the API reference behind the DATA <GO> customer portal.'
+description: 'Bloomberg Data Workflows covers the programmatic paths institutional clients use to move
+  Bloomberg''s financial data into their own systems: the Data License API, which delivers reference,
+  pricing, regulatory and alternative data in bulk or per security over a JWT-authenticated REST/hypermedia
+  endpoint at api.bloomberg.com/eap, over SFTP, or natively into the major cloud providers; and the Server
+  API (SAPI), the shared-server deployment of BLPAPI that serves real-time subscription and historical
+  request/response market data to applications across a firm. Both are gated behind an active Bloomberg
+  Professional or Enterprise agreement. Bloomberg ships first-party BLPAPI SDKs for C++, Java, C# (.NET)
+  and Python from its own distribution hosts, but publishes no OpenAPI, AsyncAPI, GraphQL schema or MCP
+  server for either API, and keeps the API reference behind the DATA <GO> customer portal.'
 type: Index
 deliveryModel:
   model: saas
@@ -52,15 +53,16 @@ tags_raw:
 - Trading
 url: https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
 created: '2024-01-01'
-modified: '2026-08-27'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: bloomberg-data-workflows:bloomberg-data-license-api
   name: Bloomberg Data License API
-  description: Batch and per-security delivery of Bloomberg's reference, pricing, regulatory and alternative data
-    for integration into proprietary applications and workflows. The REST / hypermedia entry point is https://api.bloomberg.com/eap/;
-    every request must carry a signed JWT (RFC 7519) issued against the customer's Data License credential file.
-    The same content is also delivered over SFTP and natively into the major cloud providers.
+  description: Batch and per-security delivery of Bloomberg's reference, pricing, regulatory and alternative
+    data for integration into proprietary applications and workflows. The REST / hypermedia entry point
+    is https://api.bloomberg.com/eap/; every request must carry a signed JWT (RFC 7519) issued against
+    the customer's Data License credential file. The same content is also delivered over SFTP and natively
+    into the major cloud providers.
   humanURL: https://professional.bloomberg.com/products/data/data-license/
   baseURL: https://api.bloomberg.com/eap
   tags:
@@ -77,10 +79,11 @@ apis:
     url: errors/bloomberg-data-workflows-problem-types.yml
 - aid: bloomberg-data-workflows:bloomberg-server-api
   name: Bloomberg SAPI (Server API)
-  description: 'The shared-server deployment of BLPAPI, providing real-time subscription and historical request/response
-    market data to applications across a firm. SAPI is not an HTTP API: clients open a TCP session with the BLPAPI
-    SDK against the customer''s own Server API host (the Desktop API equivalent is localhost:8194), so no public
-    base URL exists. Identity is the firm''s Bloomberg entitlements, not a token.'
+  description: 'The shared-server deployment of BLPAPI, providing real-time subscription and historical
+    request/response market data to applications across a firm. SAPI is not an HTTP API: clients open
+    a TCP session with the BLPAPI SDK against the customer''s own Server API host (the Desktop API equivalent
+    is localhost:8194), so no public base URL exists. Identity is the firm''s Bloomberg entitlements,
+    not a token.'
   humanURL: https://professional.bloomberg.com/products/data/data-connectivity/server-api/
   tags:
   - Historical Data
@@ -95,6 +98,8 @@ apis:
   - type: SDKs
     url: packages/bloomberg-data-workflows-packages.yml
 common:
+- type: Website
+  url: https://bloomberg.com
 - type: ParentCompany
   url: https://apis.io/providers/bloomberg/
   name: Bloomberg
