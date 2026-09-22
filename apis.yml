@@ -35,6 +35,9 @@ accessModel:
   generated: '2026-08-27'
   method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomberg-data-workflows.png
+x-docs-platform: redoc
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-20
 tags:
 - Enterprise Data
 - Financial Analytics
