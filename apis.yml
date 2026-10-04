@@ -41,7 +41,7 @@ x-docs-platform-checked: 2026-09-20
 tags:
 - Enterprise Data
 - Financial Analytics
-- Financial-Services
+- Financial Services
 - Investment Management
 - Market Data
 - Reference Data
@@ -54,6 +54,7 @@ tags_raw:
 - Market Data
 - Reference Data
 - Trading
+- Financial-Services
 url: https://raw.githubusercontent.com/api-evangelist/bloomberg-data-workflows/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-09-16'
