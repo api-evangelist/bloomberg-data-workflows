@@ -1,4 +1,4 @@
-# Bloomberg Data Workflows API (bloomberg-data-workflows)
+# Bloomberg Data Workflows
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,84 +64,117 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bloomberg Data Workflows provides programmatic access to Bloomberg's financial data, analytics, and workflow solutions for institutional clients.
+Bloomberg Data Workflows covers the programmatic paths institutional clients use to move Bloomberg's financial data into their own systems: the Data License API, which delivers reference, pricing, regulatory and alternative data in bulk or per security over a JWT-authenticated REST/hypermedia endpoint at api.bloomberg.com/eap, over SFTP, or natively into the major cloud providers; and the Server API (SAPI), the shared-server deployment of BLPAPI that serves real-time subscription and historical request/response market data to applications across a firm. Both are gated behind an active Bloomberg Professional or Enterprise agreement. Bloomberg ships first-party BLPAPI SDKs for C++, Java, C# (.NET) and Python from its own distribution hosts, but publishes no OpenAPI, AsyncAPI, GraphQL schema or MCP server for either API, and keeps the API reference behind the DATA <GO> customer portal.
 
-**URL:** [Visit APIs.json URL](https://www.bloomberg.com/professional/product/data-workflows/)
+**Areas:** Enterprise Data · Financial Analytics · Financial Services · Investment Management · Market Data · Reference Data · Trading
 
-## Tags:
+## Bloomberg Data Workflows on APIs.io
 
- - Financial Services, Market Data, Financial Analytics, Enterprise Data, Trading, Investment Management
+Everything profiled for Bloomberg Data Workflows is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bloomberg-data-workflows/](https://apis.io/providers/bloomberg-data-workflows/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2024 
-- **Modified:** 2024 
+- [Bloomberg Data License API](https://apis.io/apis/bloomberg-data-workflows/bloomberg-data-license-api/) — Batch and per-security delivery of Bloomberg's reference, pricing, regulatory and alternative data for integration into proprietary applications and…
+- [Bloomberg SAPI (Server API)](https://apis.io/apis/bloomberg-data-workflows/bloomberg-server-api/) — The shared-server deployment of BLPAPI, providing real-time subscription and historical request/response market data to applications across a firm. SAPI is…
 
-## APIs
+### Published properties
 
-### Bloomberg Data License API
-Provides batch delivery of Bloomberg's reference, pricing, and analytics data for integration into proprietary applications and workflows.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**Human URL:** [https://www.bloomberg.com/professional/product/data-license/](https://www.bloomberg.com/professional/product/data-license/)
+#### Security (3)
 
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags:
+- [Bloomberg Data Workflows Authentication](https://apis.io/security/bloomberg-data-workflows/bloomberg-data-workflows-authentication/)
+- [Bloomberg Data Workflows Domain Security](https://apis.io/security/bloomberg-data-workflows/bloomberg-data-workflows-domain-security/)
+- [Bloomberg Data Workflows Vulnerability Disclosure](https://apis.io/security/bloomberg-data-workflows/bloomberg-data-workflows-vulnerability-disclosure/)
 
- - Financial Data, Market Data, Reference Data, Pricing
+#### OAuth scopes (1)
 
-#### Properties
+The permissions the API asks for.
 
-- [Documentation](https://www.bloomberg.com/professional/support/documentation/)
-- [OpenAPI](https://api.bloomberg.com/datalicense/v1/openapi.json)
-- [Authentication](https://www.bloomberg.com/professional/support/api-library/)
+- [Bloomberg Data Workflows Scopes](https://apis.io/scopes/bloomberg-data-workflows/bloomberg-data-workflows-scopes/)
 
-### Bloomberg SAPI (Server API)
-Real-time and historical market data API providing access to Bloomberg's comprehensive financial data through a server-based connection.
+#### Plans and pricing (1)
 
-**Human URL:** [https://www.bloomberg.com/professional/support/api-library/](https://www.bloomberg.com/professional/support/api-library/)
+Published plans, tiers and prices.
 
+- [Bloomberg Data Workflows Plans Pricing](https://apis.io/plans/bloomberg-data-workflows/bloomberg-data-workflows-plans-pricing/)
 
-#### Tags:
+#### Rate limits (1)
 
- - Real-time Data, Market Data, Historical Data, Streaming
+Published request limits.
 
-#### Properties
+- [Bloomberg Data Workflows Rate Limits](https://apis.io/rate-limits/bloomberg-data-workflows/bloomberg-data-workflows-rate-limits/)
 
-- [Documentation](https://www.bloomberg.com/professional/support/documentation/)
-- [SDK](https://www.bloomberg.com/professional/support/api-library/)
+#### FinOps (1)
 
-### Bloomberg BEAP (Bloomberg Enterprise Access Point)
-Enterprise-level data distribution platform for delivering Bloomberg data feeds to multiple applications and users within an organization.
+What the API costs to run, by operation.
 
-**Human URL:** [https://www.bloomberg.com/professional/product/enterprise-access-point/](https://www.bloomberg.com/professional/product/enterprise-access-point/)
+- [Bloomberg Data Workflows Finops](https://apis.io/finops/bloomberg-data-workflows/bloomberg-data-workflows-finops/)
 
+## Where to find this API
 
-#### Tags:
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
- - Enterprise, Data Distribution, Data Feeds, Integration
+- [Website](https://bloomberg.com)
+- [Documentation](https://professional.bloomberg.com/support/api-library/)
+- [API reference](https://bloomberg.github.io/blpapi-docs/)
+- [Support](https://professional.bloomberg.com/support/)
+- [Security](https://www.bloomberg.com/.well-known/security.txt)
+- [Terms of service](https://www.bloomberg.com/notices/tos/)
+- [Privacy policy](https://www.bloomberg.com/privacy/)
+- [GitHub](https://github.com/bloomberg)
 
-#### Properties
+## API Evangelist rating
 
-- [Documentation](https://www.bloomberg.com/professional/support/documentation/)
-- [Architecture](https://www.bloomberg.com/professional/product/enterprise-access-point/)
+**Kin Score 31.4** — thin · rubric 0.24.0 · scored 2026-10-17
 
-### Bloomberg B-PIPE
-Low-latency market data feed providing real-time and delayed market data, reference data, and analytics for algorithmic trading and quantitative analysis.
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 57.1 |
+| Access clarity | 27.6 |
 
-**Human URL:** [https://www.bloomberg.com/professional/product/b-pipe/](https://www.bloomberg.com/professional/product/b-pipe/)
+**Agent readiness 16.2** — agent-aware
 
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-#### Tags:
+**Regulatory alignment 43.5** — Securities & Market Data
 
- - Low Latency, Streaming Data, Real-time, Trading
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bloomberg-data-workflows/](https://apis.io/providers/bloomberg-data-workflows/).
 
-#### Properties
+## How this profile is made
 
-- [Documentation](https://www.bloomberg.com/professional/support/api-library/)
-- [SDK](https://www.bloomberg.com/professional/support/api-library/)
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Maintainers
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Bloomberg Data Workflows: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-**FN:** Bloomberg L.P.
+## Open an issue
 
-**Email:** support@bloomberg.net
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bloomberg-data-workflows/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
